@@ -132,7 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     
     $sp = array();
-    $stmt = $db->prepare("SELECT s.tip FROM auth l, application z, abilities s, sv sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
+    $stmt = $db->prepare("SELECT s.tip FROM auth l, application
+ z, abilities s, sv sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
     if($stmt->execute()){
       foreach($stmt as $row){
         array_push($sp, $row['tip']);
@@ -144,8 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
 
     printf('Вход с логином %s ', $_SESSION['login']);
-  
   }
+
   include('form.php');
 }
 else{
@@ -169,7 +170,7 @@ if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/
     setcookie('year_value', $_POST['year'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['email']) || !preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $_POST['email'])) { // На случай если нельхя библиотеки
+if (empty($_POST['email'])  || !preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $_POST['email'])) { // На случай если нельхя библиотеки
     
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
@@ -189,7 +190,7 @@ if (empty($_POST['gender']) || !($_POST['gender']=='1' || $_POST['gender']=='2')
     setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || ($_POST['amount_of_limbs']==2) || ($_POST['amount_of_limbs']==4))  {
+if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || !($_POST['limbs']==2 || $_POST['limbs']==4))  {
     
     setcookie('limbs_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
@@ -265,7 +266,7 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
       $stmt->bindParam(':my_pol', $_POST['gender']);
       $stmt->bindParam(':my_konech', $_POST['limbs']);
       $stmt->bindParam(':my_biogr', $_POST['bio']);
-      $stmt->bindParam(':my_log_c', $_SESSION['login']);
+      $stmt->bindParam(':my_login', $_SESSION['login']);
       $stmt->execute();
   }
   else {
@@ -327,7 +328,7 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
     $max_id_z = ($db->lastInsertId());
     foreach ($_POST['superpowers'] as $ability) {
      print($max_id_z);
-    //$stmt = $db->prepare("INSERT INTO abilities SET tip = ? ");
+    //$stmt = $db->prepare("INSERT INTO sposob SET tip = ? ");
     //$stmt->execute([$_POST['$ability']]);
       $stmt = $db->prepare("INSERT INTO abilities SET tip = :mytip");
       $stmt->bindParam(':mytip', $ability);
@@ -356,4 +357,4 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
 
 
 
-?>
+?>й
