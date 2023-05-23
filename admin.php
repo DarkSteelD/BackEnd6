@@ -134,7 +134,7 @@ if($stmt->execute()){
     echo '<td><input name= "'. (string)$bios[$i] . '" value = '.  $values['bio'] .'></td>';  
 
    
-    echo '<input name = "bubu" type="submit" value="Отправить">';
+    echo '<td><input name = "bubu" type="submit" value="Отправить">';
 
     echo '</tr>';
   }
