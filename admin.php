@@ -134,12 +134,12 @@ if($stmt->execute()){
     echo '<td><input name= "'. (string)$bios[$i] . '" value = '.  $values['bio'] .'></td>';  
 
    
-    
+    echo '<input name = "bubu" type="submit" value="Отправить">';
+
     echo '</tr>';
   }
 }
 echo '</table>';
-echo '<input name = "bubu" type="submit" value="Отправить">';
 //foreach ($names as $nn)
 //{print($nn);
 //}
@@ -179,7 +179,7 @@ foreach ($stmt as $v){
   }
 }
 echo '</br>';
-print('Невиидимость: ');
+print('Бессмертие: ');
 $stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'immortality'"); 
 $stmt->execute();
 foreach ($stmt as $v){
