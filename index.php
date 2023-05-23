@@ -94,14 +94,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
  
   
   $values = array();
-  $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
-  $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
-  $values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
-  $values['gender'] = empty($_COOKIE['gender_value']) ? '' : $_COOKIE['gender_value'];
-  $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
-  $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
-  $values['ability'] = empty($_COOKIE['ability_value']) ? array() : json_decode($_COOKIE['ability_value']);
-  $values['check'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
+  $values['name'] = empty($_COOKIE['name_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['name_value']));
+  $values['email'] = empty($_COOKIE['email_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['email_value']));
+  $values['year'] = empty($_COOKIE['year_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['year_value']));
+  $values['gender'] = empty($_COOKIE['gender_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['gender_value']));
+  $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['limbs_value']));
+  $values['bio'] = empty($_COOKIE['bio_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['bio_value']));
+  $values['ability'] = empty($_COOKIE['ability_value']) ? array() : htmlspecialchars(strip_tags(json_decode($_COOKIE['ability_value'])));
+  $values['check'] = empty($_COOKIE['check_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['check_value']));
 
   $k = 0;
 
@@ -121,12 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       foreach($stmt as $row){
   
 
-        $values['name']= $row["namee"];
-        $values['email'] = $row["email"];
-        $values['year'] = $row["godrod"];
-        $values['limbs'] = $row["konech"];
-        $values['gender'] = $row["pol"];
-        $values['bio'] = $row["biogr"];
+        $values['name']= htmlspecialchars(strip_tags($row["namee"]));
+        $values['email'] = htmlspecialchars(strip_tags($row["email"]));
+        $values['year'] = htmlspecialchars(strip_tags($row["godrod"]));
+        $values['limbs'] = htmlspecialchars(strip_tags($row["konech"]));
+        $values['gender'] = htmlspecialchars(strip_tags($row["pol"]));
+        $values['bio'] = htmlspecialchars(strip_tags($row["biogr"]));
 
       }
     }

@@ -123,10 +123,10 @@ input: , select: , textarea:  {
 
 <h1 style="text-align: center;"> Набор героев</h1>
   <form action="index.php" method="POST">
-  <label for="name">Имя:</label>  <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>" />
+  <label for="name">Имя:</label>  <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print htmlspecialchars(strip_tags($values['name'])); ?>" />
 
 
-  <label for="email">E-mail:</label>  <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" type="email" />
+  <label for="email">E-mail:</label>  <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print htmlspecialchars(strip_tags($values['email'])); ?>" type="email" />
 
 
   <label for="year">Год рождения:</label>
@@ -155,7 +155,7 @@ input: , select: , textarea:  {
   
 
 <label for="bio">Биография:</label>
-  <textarea name="bio" <?php if ($errors['bio']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
+  <textarea name="bio" <?php if ($errors['bio']) {print 'class="error"';} ?>><?php print htmlspecialchars(strip_tags($values['bio'])); ?></textarea>
 
 
 
