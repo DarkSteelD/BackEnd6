@@ -170,7 +170,7 @@ if(isset($_POST['bubu']))
 print('Статистика');
 echo '</br>';
 print('Левитация: ');
-$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'levitat'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'levitation'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
@@ -180,7 +180,7 @@ foreach ($stmt as $v){
 }
 echo '</br>';
 print('Невиидимость: ');
-$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'nevidim'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'immortality'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
@@ -190,7 +190,7 @@ foreach ($stmt as $v){
 }
 echo '</br>';
 print('Стенопроходимость: ');
-$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'stenchod'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'intangibility'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
