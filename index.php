@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['gender'] = empty($_COOKIE['gender_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['gender_value']));
   $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['limbs_value']));
   $values['bio'] = empty($_COOKIE['bio_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['bio_value']));
-  $values['ability'] = empty($_COOKIE['ability_value']) ? array() : htmlspecialchars(strip_tags(json_decode($_COOKIE['ability_value'])));
+  $values['ability'] = empty($_COOKIE['ability_value']) ? array() : json_decode($_COOKIE['ability_value']);
   $values['check'] = empty($_COOKIE['check_value']) ? '' : htmlspecialchars(strip_tags($_COOKIE['check_value']));
 
   $k = 0;
