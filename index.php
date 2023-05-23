@@ -169,7 +169,7 @@ if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/
     setcookie('year_value', $_POST['year'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['email'] || FILTER_VALIDATE_EMAIL($_POST['email']) || !preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $_POST['email'])) { // На случай если нельхя библиотеки
+if (empty($_POST['email']) || !preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $_POST['email'])) { // На случай если нельхя библиотеки
     
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
