@@ -179,7 +179,7 @@ if (empty($_POST['email']) || !preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-
     setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['gender']) || !($_POST['gender']=='female' || $_POST['gender']=='male')) {
+if (empty($_POST['gender']) || !($_POST['gender']=='1' || $_POST['gender']=='2')) {
     
     setcookie('gender_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
