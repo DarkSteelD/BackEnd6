@@ -12,11 +12,6 @@ header('Content-Type: text/html; charset=UTF-8');
 
 $b = NAN;
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  $_SESSION['token'] = bin2hex(random_bytes(32));
-
-   if (!empty($_SESSION['login'])) 
-    {echo '<input type="hidden" name="token" value="' . $_SESSION["token"] . '">'; } 
-
 
   $messages = array();
 
@@ -195,7 +190,7 @@ if (empty($_POST['gender']) || !($_POST['gender']=='1' || $_POST['gender']=='2')
     setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || ($_POST['amount_of_limbs']==2) || ($_POST['amount_of_limbs']==4))  {
+if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || !($_POST['limbs']==2 || $_POST['limbs']==4))  {
     
     setcookie('limbs_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
@@ -261,8 +256,6 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
 
     
   }
-  if (!empty($_POST['token']) && hash_equals($_POST['token'], $_SESSION['token'])) {
-   
   if (!empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
       $db = connect();
@@ -356,10 +349,6 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
     exit();
   }
   }
-  // сохранение изменённых данных в базу
-} else {
-   die('Ошибка CSRF: недопустимый токен');
-}
  
   
   setcookie('save', '1');
