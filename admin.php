@@ -1,17 +1,17 @@
 <?php
-function foo()
+function connect()
 {
-  $user = 'u52834'; // Заменить на ваш логин uXXXXX
-  $pass = '5281480'; // Заменить на пароль, такой же, как от SSH
-  $db1 = new PDO('mysql:host=localhost;dbname=u52834', $user, $pass,
-    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-  return $db1;
+  $user = 'u52814'; // Заменить на ваш логин uXXXXX
+  $pass = '2697434'; // Заменить на пароль, такой же, как от SSH
+  $db = new PDO('mysql:host=localhost;dbname=u52814', $user, $pass,
+    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+  return $db;
 
 }
 
 function tootoo($l, $n, $e, $y, $k, $g, $b)
 {
-  $db = foo();
+  $db = connect();
   //tootoo($b['login'], $b['name'], $b['email'], $b['year'], $b['kon'], $b['gender'], $b['bio']);
   $stmt = $db->prepare("UPDATE zayava SET namee = :my_namee, email = :my_email, godrod = :my_godrod, pol = :my_pol, konech = :my_konech, biogr = :my_biogr WHERE id_z = (SELECT id_z FROM lopata WHERE login = :my_lolo)");
   $stmt->bindParam(':my_namee', $n);
@@ -76,7 +76,7 @@ echo '</br>';
 ?>
 <form action = "admin.php" method="POST">
 <?php
-$db = foo();
+$db = connect();
 
 $stmt = $db->prepare("SELECT l.login, z.namee, z.email, z.godrod, z.pol, z.konech, z.biogr FROM lopata l, zayava z WHERE l.id_z = z.id_z");  
 echo '<table border="1">';
