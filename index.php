@@ -12,6 +12,11 @@ header('Content-Type: text/html; charset=UTF-8');
 
 $b = NAN;
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  $_SESSION['token'] = bin2hex(random_bytes(32));
+
+   if (!empty($_SESSION['login'])) 
+    {echo '<input type="hidden" name="token" value="' . $_SESSION["token"] . '">'; } 
+
 
   $messages = array();
 
@@ -28,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         и паролем <strong>%s</strong> для изменения данных.',
         strip_tags($_COOKIE['login']),
         strip_tags($_COOKIE['pass']));
+
     }
   }
 
@@ -255,6 +261,8 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
 
     
   }
+  if (!empty($_POST['token']) && hash_equals($_POST['token'], $_SESSION['token'])) {
+   
   if (!empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
       $db = connect();
@@ -348,6 +356,10 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
     exit();
   }
   }
+  // сохранение изменённых данных в базу
+} else {
+   die('Ошибка CSRF: недопустимый токен');
+}
  
   
   setcookie('save', '1');
