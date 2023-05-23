@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     
     $sp = array();
-    $stmt = $db->prepare("SELECT s.tip FROM auth l, application z, sposob s, svyaz sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
+    $stmt = $db->prepare("SELECT s.tip FROM auth l, application z, abilities s, sv sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
     if($stmt->execute()){
       foreach($stmt as $row){
         array_push($sp, $row['tip']);
@@ -327,7 +327,7 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
     $max_id_z = ($db->lastInsertId());
     foreach ($_POST['superpowers'] as $ability) {
      print($max_id_z);
-    //$stmt = $db->prepare("INSERT INTO sposob SET tip = ? ");
+    //$stmt = $db->prepare("INSERT INTO abilities SET tip = ? ");
     //$stmt->execute([$_POST['$ability']]);
       $stmt = $db->prepare("INSERT INTO abilities SET tip = :mytip");
       $stmt->bindParam(':mytip', $ability);
