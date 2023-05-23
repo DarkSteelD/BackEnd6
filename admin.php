@@ -13,7 +13,7 @@ function tootoo($l, $n, $e, $y, $k, $g, $b)
 {
   $db = connect();
   //tootoo($b['login'], $b['name'], $b['email'], $b['year'], $b['kon'], $b['gender'], $b['bio']);
-  $stmt = $db->prepare("UPDATE zayava SET namee = :my_namee, email = :my_email, godrod = :my_godrod, pol = :my_pol, konech = :my_konech, biogr = :my_biogr WHERE id_z = (SELECT id_z FROM lopata WHERE login = :my_lolo)");
+  $stmt = $db->prepare("UPDATE application  SET namee = :my_namee, email = :my_email, godrod = :my_godrod, pol = :my_pol, konech = :my_konech, biogr = :my_biogr WHERE id_z = (SELECT id_z FROM auth  WHERE login = :my_lolo)");
   $stmt->bindParam(':my_namee', $n);
   $stmt->bindParam(':my_email', $e);
   $stmt->bindParam(':my_godrod', $y);
@@ -22,7 +22,7 @@ function tootoo($l, $n, $e, $y, $k, $g, $b)
   $stmt->bindParam(':my_biogr', $b);
   $stmt->bindParam(':my_lolo', $l);
   $stmt->execute();
-  $stmt2 = $db->prepare("SELECT id_z FROM lopata WHERE login = :my_lolo");
+  $stmt2 = $db->prepare("SELECT id_z FROM auth  WHERE login = :my_lolo");
   $stmt2->bindParam(':my_lolo', $l);
   $stmt2->execute();
   print($n);
@@ -39,7 +39,7 @@ function tootoo($l, $n, $e, $y, $k, $g, $b)
     print($a);
     //print($row);
   }
-  $stmt2 = $db->prepare("SELECT count(*) pp FROM lopata WHERE login = :my_lolo");
+  $stmt2 = $db->prepare("SELECT count(*) pp FROM auth  WHERE login = :my_lolo");
   $stmt2->bindParam(':my_lolo', $l);
   $stmt2->execute();
   foreach($stmt2 as $row)
@@ -78,7 +78,7 @@ echo '</br>';
 <?php
 $db = connect();
 
-$stmt = $db->prepare("SELECT l.login, z.namee, z.email, z.godrod, z.pol, z.konech, z.biogr FROM lopata l, zayava z WHERE l.id_z = z.id_z");  
+$stmt = $db->prepare("SELECT l.login, z.namee, z.email, z.godrod, z.pol, z.konech, z.biogr FROM auth l, application  z WHERE l.id_z = z.id_z");  
 echo '<table border="1">';
 $shapka = array('login', 'name', 'email', 'year', 'kon', 'gender', 'bio', 'change');
 echo '<tr>';
@@ -170,7 +170,7 @@ if(isset($_POST['bubu']))
 print('Статистика');
 echo '</br>';
 print('Левитация: ');
-$stmt = $db->prepare("SELECT count(*) FROM sposob s WHERE s.tip = 'levitat'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'levitat'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
@@ -180,7 +180,7 @@ foreach ($stmt as $v){
 }
 echo '</br>';
 print('Невиидимость: ');
-$stmt = $db->prepare("SELECT count(*) FROM sposob s WHERE s.tip = 'nevidim'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'nevidim'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
@@ -190,7 +190,7 @@ foreach ($stmt as $v){
 }
 echo '</br>';
 print('Стенопроходимость: ');
-$stmt = $db->prepare("SELECT count(*) FROM sposob s WHERE s.tip = 'stenchod'"); 
+$stmt = $db->prepare("SELECT count(*) FROM abilities s WHERE s.tip = 'stenchod'"); 
 $stmt->execute();
 foreach ($stmt as $v){
   foreach($v as $vv){
